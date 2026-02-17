@@ -1,0 +1,1 @@
+"""BPM detection engine package."""

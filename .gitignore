@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+target/
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# ML Models (large files)
+*.onnx
+*.pt
+*.pth
+*.bin
+!training/README.md
+
+# Audio cache
+.harmony/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
