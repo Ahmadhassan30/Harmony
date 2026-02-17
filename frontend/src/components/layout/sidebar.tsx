@@ -22,13 +22,19 @@ export function Sidebar() {
     }
 
     return (
-        <aside className="w-64 border-r border-[var(--color-border)] bg-[var(--color-bg-card)] flex flex-col">
+        <aside className="w-64 border-r border-[var(--color-border)] bg-[var(--color-bg-card)] flex flex-col h-full">
+            {/* Branding */}
+            <div className="h-14 flex items-center gap-3 px-4 border-b border-[var(--color-border)] bg-[var(--color-bg-elevated)]/50 backdrop-blur-sm">
+                <img src="/logo.png" alt="Harmony" className="w-6 h-6 object-contain" />
+                <span className="font-bold text-sm tracking-wide text-[var(--color-text)]">Harmony</span>
+            </div>
+
             {/* Header */}
-            <div className="h-12 flex items-center px-4 border-b border-[var(--color-border)]">
-                <span className="text-sm font-medium text-[var(--color-text-muted)] uppercase tracking-wider">
+            <div className="h-10 flex items-center px-4 border-b border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
+                <span className="text-xs font-medium text-[var(--color-text-muted)] uppercase tracking-wider">
                     Files
                 </span>
-                <span className="ml-auto text-xs text-[var(--color-text-dim)] font-mono">
+                <span className="ml-auto text-[10px] text-[var(--color-text-dim)] font-mono bg-[var(--color-bg-surface)] px-1.5 py-0.5 rounded">
                     {files.length}
                 </span>
             </div>
