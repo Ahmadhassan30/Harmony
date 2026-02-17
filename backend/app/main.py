@@ -42,10 +42,17 @@ def create_app() -> FastAPI:
         lifespan=lifespan,
     )
 
-    # CORS for Tauri frontend
+    # CORS for Tauri frontend + dev servers
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["tauri://localhost", "http://localhost:*", "https://localhost:*"],
+        allow_origins=[
+            "tauri://localhost",
+            "http://localhost:1420",
+            "http://localhost:5173",
+            "http://localhost:3000",
+            "http://127.0.0.1:1420",
+            "http://127.0.0.1:5173",
+        ],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
