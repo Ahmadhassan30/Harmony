@@ -9,7 +9,6 @@
         "frontendDist": "../dist"
     },
     "app": {
-        "title": "Harmony",
         "windows": [
             {
                 "title": "Harmony — Audio Analysis Engine",
