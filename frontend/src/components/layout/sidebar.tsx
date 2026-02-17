@@ -3,23 +3,8 @@ import { useAnalysisStore } from '@/stores'
 export function Sidebar() {
     const { files, activeFileId, setActiveFile } = useAnalysisStore()
 
-    const statusIcon = (status: string) => {
-        switch (status) {
-            case 'complete': return '✓'
-            case 'analyzing': return '◌'
-            case 'error': return '✗'
-            default: return '○'
-        }
-    }
+    // Helper functions removed as they are no longer used in the FL Studio design
 
-    const statusColor = (status: string) => {
-        switch (status) {
-            case 'complete': return 'text-[var(--color-success)]'
-            case 'analyzing': return 'text-[var(--color-primary)] animate-pulse'
-            case 'error': return 'text-[var(--color-danger)]'
-            default: return 'text-[var(--color-text-dim)]'
-        }
-    }
 
     return (
         <aside className="w-64 border-r border-[var(--color-border)] bg-[var(--color-bg-card)] flex flex-col h-full">
@@ -39,36 +24,52 @@ export function Sidebar() {
                 </span>
             </div>
 
-            {/* File List */}
-            <div className="flex-1 overflow-y-auto py-1">
+            {/* File List - FL Studio Browser Style */}
+            <div className="flex-1 overflow-y-auto bg-[var(--color-bg-dark)]">
                 {files.length === 0 ? (
-                    <p className="text-xs text-[var(--color-text-dim)] text-center py-8 px-4">
-                        No files loaded yet
-                    </p>
+                    <div className="flex flex-col items-center justify-center h-40 text-[var(--color-text-dim)] gap-2">
+                        <span className="text-3xl opacity-20">📂</span>
+                        <p className="text-[11px] font-mono">BROWSER EMPTY</p>
+                    </div>
                 ) : (
-                    files.map((file) => (
-                        <button
-                            key={file.id}
-                            onClick={() => setActiveFile(file.id)}
-                            className={`
-                w-full px-4 py-2.5 flex items-center gap-3 text-left
-                hover:bg-[var(--color-bg-hover)] transition-colors text-sm
-                ${activeFileId === file.id ? 'bg-[var(--color-bg-elevated)] border-r-2 border-[var(--color-primary)]' : ''}
-              `}
-                        >
-                            <span className={`text-xs ${statusColor(file.status)}`}>
-                                {statusIcon(file.status)}
-                            </span>
-                            <span className="truncate flex-1 text-[var(--color-text)]">
-                                {file.name}
-                            </span>
-                            {file.result?.bpm && (
-                                <span className="text-xs font-mono text-[var(--color-text-dim)]">
-                                    {file.result.bpm.bpm}
+                    <div className="flex flex-col">
+                        {files.map((file) => (
+                            <button
+                                key={file.id}
+                                onClick={() => setActiveFile(file.id)}
+                                className={`
+                                    w-full pl-3 pr-2 py-[2px] flex items-center gap-2 text-left group
+                                    border-b border-[var(--color-border-subtle)]/30 hover:bg-[var(--color-bg-hover)]
+                                    ${activeFileId === file.id
+                                        ? 'bg-[var(--color-primary-dim)]/20 text-[var(--color-primary)] border-l-2 border-l-[var(--color-primary)]'
+                                        : 'text-[var(--color-text)] border-l-2 border-l-transparent'}
+                                `}
+                            >
+                                {/* FL-style folder/file icon */}
+                                <span className={`text-[10px] ${activeFileId === file.id ? 'opacity-100' : 'opacity-40 group-hover:opacity-70'}`}>
+                                    {file.status === 'complete' ? '🎵' : '📄'}
                                 </span>
-                            )}
-                        </button>
-                    ))
+
+                                <span className="truncate flex-1 text-[11px] font-medium tracking-tight font-sans">
+                                    {file.name}
+                                </span>
+
+                                {/* Status indicators (FL LED style) */}
+                                <div className="flex items-center gap-1.5">
+                                    {file.status === 'analyzing' && (
+                                        <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-warning)] animate-pulse shadow-[0_0_4px_var(--color-warning)]" />
+                                    )}
+                                    {file.result?.bpm && (
+                                        <span className={`text-[10px] font-mono px-1 rounded flex items-center justify-center min-w-[32px]
+                                            ${activeFileId === file.id ? 'bg-[var(--color-primary)] text-[var(--color-text-on-primary)]' : 'bg-[var(--color-bg-elevated)] text-[var(--color-text-muted)]'}
+                                        `}>
+                                            {Math.round(file.result.bpm.bpm)}
+                                        </span>
+                                    )}
+                                </div>
+                            </button>
+                        ))}
+                    </div>
                 )}
             </div>
 

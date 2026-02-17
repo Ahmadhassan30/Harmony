@@ -35,12 +35,13 @@ export function FileDropzone() {
         <div className="flex items-center justify-center h-full">
             <label
                 className="
-          w-full max-w-xl aspect-[16/9]
-          flex flex-col items-center justify-center gap-4
-          rounded-2xl border-2 border-dashed border-[var(--color-border)]
-          bg-[var(--color-bg-card)]
-          hover:border-[var(--color-primary)] hover:bg-[var(--color-bg-elevated)]
+          w-full max-w-2xl aspect-[3/1]
+          flex flex-col items-center justify-center gap-6
+          rounded-sm border border-dashed border-[var(--color-border-highlight)]
+          bg-[var(--color-bg-dark)]
+          hover:bg-[var(--color-bg-hover)]
           transition-all duration-200 cursor-pointer group
+          select-none
         "
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => {
@@ -49,18 +50,16 @@ export function FileDropzone() {
                 }}
             >
                 {/* Icon */}
-                <div className="w-16 h-16 rounded-full bg-[var(--color-bg-elevated)] group-hover:bg-[var(--color-primary)]/10 flex items-center justify-center transition-colors">
-                    <svg className="w-8 h-8 text-[var(--color-text-dim)] group-hover:text-[var(--color-primary)] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15" />
-                    </svg>
+                <div className="w-12 h-12 bg-[var(--color-bg-elevated)] border border-[var(--color-border-subtle)] flex items-center justify-center group-hover:border-[var(--color-primary)] transition-colors">
+                    <span className="text-2xl text-[var(--color-text-dim)] group-hover:text-[var(--color-primary)] transition-colors">⬇</span>
                 </div>
 
-                <div className="text-center">
-                    <p className="text-lg font-medium text-[var(--color-text)]">
-                        Drop audio files here
+                <div className="text-center font-mono">
+                    <p className="text-sm font-bold tracking-widest text-[var(--color-text-muted)] uppercase group-hover:text-[var(--color-primary)] transition-colors">
+                        Drop Sample Here to Analyze
                     </p>
-                    <p className="text-sm text-[var(--color-text-dim)] mt-1">
-                        or click to browse — MP3, WAV, FLAC, OGG, M4A, AAC
+                    <p className="text-[10px] text-[var(--color-text-dim)] mt-2 uppercase tracking-wide opacity-60">
+                        Supports MP3 • WAV • FLAC • OGG • M4A
                     </p>
                 </div>
 
